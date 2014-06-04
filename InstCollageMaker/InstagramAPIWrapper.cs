@@ -41,7 +41,7 @@ namespace InstCollageMaker
             //https://api.instagram.com/v1/users/search?q=ashas.fe&count=1
             var request = new HttpRequestMessage(HttpMethod.Get, apiBaseUrl + "/users/search?q=" + user_name + "&count=1&client_id=b88d662bf62c4e3f99bfadd781ac6ff1");//&access_token=" + apiAccessToken);
             var searchResponse = await SendAsync<InstagramResponse>(request);
-            if (searchResponse == null)
+            if (searchResponse.data.Count == 0)
                 return null;
             var result = searchResponse.data[0].id;
             return result;
@@ -52,7 +52,7 @@ namespace InstCollageMaker
             //https://api.instagram.com/v1/users/3082112/media/recent
             var request = new HttpRequestMessage(HttpMethod.Get, apiBaseUrl + "/users/" + user_id + "/media/recent?client_id=b88d662bf62c4e3f99bfadd781ac6ff1");//?access_token=" + apiAccessToken);
             var photosResponse = await SendAsync<PhotosResponse>(request);
-            if (photosResponse == null)
+            if (photosResponse.data.Count == 0)
                 return null;
             var result = new ObservableCollection<PhotoModel>();
             foreach (var u in photosResponse.data)
