@@ -88,7 +88,7 @@ namespace InstCollageMaker
 
         [JsonProperty("likes")]
         public Likes likes { get; set; }
-        public Image images { get; set; }
+        public Images images { get; set; }
     }
 
     public class PhotosResponse
@@ -101,7 +101,7 @@ namespace InstCollageMaker
         public int count { get; set; }
     }
     
-    public class Image
+    public class Images
     {
         public StandartResolution standard_resolution { get; set; }
     }

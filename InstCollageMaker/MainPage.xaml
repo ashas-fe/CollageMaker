@@ -54,21 +54,7 @@
                 </Button>
                 <TextBlock Text="User not found" Visibility="{Binding IsUserFound, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Inverted}"/>
             </StackPanel>
-
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="200"/>                        
-                    <RowDefinition Height="200"/>
-                </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                    <Image Source="{Binding ImgURL1}"/>
-                    <Image Source="{Binding ImgURL2}"/>
-                </StackPanel>
-                <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <Image Source="{Binding ImgURL3}"/>
-                    <Image Source="{Binding ImgURL4}"/>
-                </StackPanel>
-            </Grid>
+            <Image Source="{Binding Img}"/>
         </StackPanel>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are
