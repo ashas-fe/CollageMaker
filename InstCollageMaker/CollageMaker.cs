@@ -96,10 +96,6 @@ namespace InstCollageMaker
                 // Encode WriteableBitmap object to a JPEG stream.
                 Extensions.SaveJpeg(wbFinal, fileStream, wbFinal.PixelWidth, wbFinal.PixelHeight, 0, 85);
 
-                MediaLibrary mediaLibrary = new MediaLibrary();
-                Picture pic = mediaLibrary.SavePicture(tempJPEG, fileStream);
-
-                
                 fileStream.Close();
 
 
