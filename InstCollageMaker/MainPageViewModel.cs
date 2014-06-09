@@ -10,6 +10,9 @@ using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using Microsoft.Phone.Tasks;
+using Microsoft.Xna.Framework.Media;
+using System.IO;
 
 namespace InstCollageMaker
 {
@@ -22,7 +25,16 @@ namespace InstCollageMaker
             {
                 LoadData();
             });
+
+            SendByEmail = new DelegateCommand(() =>
+            {
+
+                
+                 
+            });
             IsUserFound = true;
+            IsUserPhotos = true;
+            IsCollageReady = false;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -64,6 +76,7 @@ namespace InstCollageMaker
         }
 
         public ICommand GetCollage { get; set; }
+        public ICommand SendByEmail { get; set; }
 
         private bool isUserFound;
         public bool IsUserFound
@@ -79,9 +92,40 @@ namespace InstCollageMaker
             }
         }
 
+        private bool isUserPhotos;
+        public bool IsUserPhotos
+        {
+            get
+            {
+                return isUserPhotos;
+            }
+            set
+            {
+                isUserPhotos = value;
+                NotifyPropertyChanged("IsUserPhotos");
+            }
+        }
+
+        private bool isCollageReady;
+        public bool IsCollageReady
+        {
+            get
+            {
+                return isCollageReady;
+            }
+            set
+            {
+                isCollageReady = value;
+                NotifyPropertyChanged("IsCollageReady");
+            }
+        }
+
         public async void LoadData()
         {
             IsUserFound = true;
+            IsUserPhotos = true;
+            IsCollageReady = false;
+            Img = null;
 
             InstagramAPI apiClient = new InstagramAPI();
             string user_id = await apiClient.GetUserID(UserName);
@@ -91,6 +135,12 @@ namespace InstCollageMaker
                 return;
             }
             ObservableCollection<PhotoModel> photos = await apiClient.GetPhotos(user_id);
+
+            if (photos == null)
+            {
+                IsUserPhotos = false;
+                return;
+            }
             ObservableCollection<PhotoModel> photosSort = new ObservableCollection<PhotoModel>(
             photos.OrderByDescending(PhotoModel => PhotoModel.likes));
 
@@ -118,6 +168,7 @@ namespace InstCollageMaker
             
             CollageMaker cm = new CollageMaker();
             Img = await cm.MakeCollage(images);
+            IsCollageReady = true;
 
         }
 

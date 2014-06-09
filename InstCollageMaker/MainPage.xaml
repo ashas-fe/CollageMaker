@@ -40,21 +40,28 @@
          -->
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
-            <TextBlock Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel x:Name="CollageMaker" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="Collage Maker for instagram user" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
+            <TextBlock Text="Collage Maker" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <StackPanel Grid.Row="1">
             <StackPanel >
                 <TextBox Text="{Binding UserName, Mode=TwoWay}"/>
-                <Button Command="{Binding GetCollage}">
-                    <TextBlock Text="Get Collage"/>
-                </Button>
+                <StackPanel Orientation="Horizontal">
+                    <Button Command="{Binding GetCollage}">
+                        <TextBlock Text="Get Collage"/>
+                    </Button>
+                    <Button Command="{Binding SendByEmail}" Visibility="{Binding IsCollageReady, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Normal}">
+                        <TextBlock Text="Send by email"/>
+                    </Button>
+                </StackPanel>
                 <TextBlock Text="User not found" Visibility="{Binding IsUserFound, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Inverted}"/>
+                <TextBlock Text="User don't have photoss" Visibility="{Binding IsUserPhotos, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Inverted}"/>
             </StackPanel>
             <Image Source="{Binding Img}"/>
+
         </StackPanel>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are

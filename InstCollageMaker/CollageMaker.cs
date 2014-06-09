@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Media;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.IsolatedStorage;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -73,6 +75,36 @@ namespace InstCollageMaker
             }
 
             wbFinal.Invalidate();
+            
+            // Save image.
+            String tempJPEG = "collage.jpg";
+
+            // Create virtual store and file stream. Check for duplicate tempJPEG files.
+            using (IsolatedStorageFile myIsolatedStorage = IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                if (myIsolatedStorage.FileExists(tempJPEG))
+                {
+                    myIsolatedStorage.DeleteFile(tempJPEG);
+                }
+
+                IsolatedStorageFileStream fileStream = myIsolatedStorage.CreateFile(tempJPEG);
+
+                StreamResourceInfo srinfo = null;
+                Uri uri = new Uri(tempJPEG, UriKind.Relative);
+                srinfo = Application.GetResourceStream(uri);
+
+                // Encode WriteableBitmap object to a JPEG stream.
+                Extensions.SaveJpeg(wbFinal, fileStream, wbFinal.PixelWidth, wbFinal.PixelHeight, 0, 85);
+
+                MediaLibrary mediaLibrary = new MediaLibrary();
+                Picture pic = mediaLibrary.SavePicture(tempJPEG, fileStream);
+
+                
+                fileStream.Close();
+
+
+            }
+
             return wbFinal;
         }
     }
