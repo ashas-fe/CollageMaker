@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using InstCollageMaker.Resources;
-using System.IO.IsolatedStorage;
+﻿using Microsoft.Phone.Controls;
 
 namespace InstCollageMaker
 {
@@ -20,11 +10,6 @@ namespace InstCollageMaker
             InitializeComponent();
             DataContext = new MainPageViewModel();
             MainPageViewModel viewModel = DataContext as MainPageViewModel;
-            //viewModel.LoadData();
-         //   this.Loaded += new RoutedEventHandler(MainPage_Loaded);
-
-            // Sample code to localize the ApplicationBar
-            //BuildLocalizedApplicationBar();
         }
 
         // Sample code for building a localized ApplicationBar
