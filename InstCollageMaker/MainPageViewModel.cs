@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
-using System.IO.IsolatedStorage;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
-using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using Microsoft.Phone.Tasks;
-using Microsoft.Xna.Framework.Media;
-using System.IO;
+using Microsoft.Phone.Controls;
 
 namespace InstCollageMaker
 {
@@ -28,9 +21,8 @@ namespace InstCollageMaker
 
             SendByEmail = new DelegateCommand(() =>
             {
-
-                
-                 
+                PhoneApplicationFrame RootView = (PhoneApplicationFrame)App.Current.RootVisual;
+                RootView.Navigate(new Uri("/SendEmail.xaml", UriKind.Relative));
             });
             IsUserFound = true;
             IsUserPhotos = true;
@@ -128,6 +120,11 @@ namespace InstCollageMaker
             Img = null;
 
             InstagramAPI apiClient = new InstagramAPI();
+            if (string.IsNullOrWhiteSpace(UserName))
+            {
+                return;
+            }
+
             string user_id = await apiClient.GetUserID(UserName);
             if (user_id == null)
             {

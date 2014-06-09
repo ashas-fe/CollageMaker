@@ -50,12 +50,10 @@
             <StackPanel >
                 <TextBox Text="{Binding UserName, Mode=TwoWay}"/>
                 <StackPanel Orientation="Horizontal">
-                    <Button Command="{Binding GetCollage}">
-                        <TextBlock Text="Get Collage"/>
-                    </Button>
-                    <Button Command="{Binding SendByEmail}" Visibility="{Binding IsCollageReady, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Normal}">
-                        <TextBlock Text="Send by email"/>
-                    </Button>
+                    <Button Command="{Binding GetCollage}" Content="Get Collage"/>
+
+                    <Button Command="{Binding SendByEmail}" Visibility="{Binding IsCollageReady, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Normal}" Content="Send by e-mail"/>
+
                 </StackPanel>
                 <TextBlock Text="User not found" Visibility="{Binding IsUserFound, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Inverted}"/>
                 <TextBlock Text="User don't have photoss" Visibility="{Binding IsUserPhotos, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Inverted}"/>
