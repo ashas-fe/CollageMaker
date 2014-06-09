@@ -26,7 +26,7 @@ namespace InstCollageMaker
                   mailMessage.From = "myapp@mycompany.com";
                   //set mail data
 
-                  mailMessage.To = "ashas.fe@gmail.com";
+                  mailMessage.To = Email;
                   mailMessage.Subject = "Collage";
                   mailMessage.Body = "Collage:";
 

@@ -31,7 +31,7 @@
 
             <StackPanel>
                 <TextBlock Text="enter address"/>
-                <TextBox Text="{Binding Email}"/>
+                <TextBox Text="{Binding Email, Mode=TwoWay}" />
                 <Button Content="send email" Command="{Binding SendEmail}"/>
                          
             </StackPanel>
